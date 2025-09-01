@@ -9,7 +9,7 @@ from lights import *
 from material import Material
 
 width = 256
-height = 250
+height = 256
 
 screen = pygame.display.set_mode((width, height), pygame.SCALED)
 clock = pygame.time.Clock()
@@ -17,10 +17,10 @@ clock = pygame.time.Clock()
 rend = Renderer(screen)
 
 brick = Material(diffuse = [1, 0, 0])
-grass = Material(diffuse = [0, 1, 0])
-petalos = Material(diffuse = [1, 1, 0])
-center = Material(diffuse = [0.27, 0.17, 0.09])
-seeds = Material(diffuse = [0.65, 0.50, 0.39])
+grass = Material(diffuse = [0, 1, 0], spec = 32, ks = 0.4)
+petalos = Material(diffuse = [1, 1, 0], spec = 16, ks = 0.5)
+center = Material(diffuse = [0.27, 0.17, 0.09], spec = 16, ks = 0.5)
+seeds = Material(diffuse = [0.65, 0.50, 0.39], spec = 16, ks = 0.5)
 
 
 rend.scene.append(Sphere(position=[0, 0, -5], radius=0.5, material=center))
@@ -40,10 +40,14 @@ rend.scene.append(Sphere(position=[0, -0.9, -5], radius=0.5, material=petalos))
 rend.scene.append(Sphere(position=[-0.8, -0.5, -5], radius=0.5, material=petalos))
 rend.scene.append(Sphere(position=[-0.8, 0.4, -5], radius=0.5, material=petalos))
 
+rend.scene.append(Sphere(position=[0, -2, -7], radius=0.2, material=grass))
+rend.scene.append(Sphere(position=[0, -2.5, -7], radius=0.2, material=grass))
+rend.scene.append(Sphere(position=[0, -3, -7], radius=0.2, material=grass))
+rend.scene.append(Sphere(position=[0, -3.5, -7], radius=0.2, material=grass))
 
 
 
-rend.lights.append(AmbientLight())
+rend.lights.append(AmbientLight(intensity = 0.2))
 rend.lights.append(DirectionalLight(direction = [-1, -1, -1]))
 
 rend.glRender()
